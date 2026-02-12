@@ -93,7 +93,7 @@ import GenericFooter from 'src/components/GenericFooter.vue'
 import { useFileLoader } from 'src/components/file/useFileLoader'
 import { popFileDialog } from 'src/components/file/popFileDialog'
 import DownloadButton from 'src/components/file/DownloadButton.vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import jsonurl from 'json-url'
 import { useQuasar } from 'quasar'

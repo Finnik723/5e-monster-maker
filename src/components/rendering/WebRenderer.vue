@@ -97,7 +97,7 @@
     >
       <span class="name">{{ $t('monster.gear') }}</span
       >&nbsp;
-      <span v-html="inventory"></span>
+      <span v-safe-html="inventory"></span>
     </div>
     <div
       v-show="monster.resistances && monster.resistances.length > 0"
@@ -175,38 +175,38 @@
       <div
         v-for="(trait, idx) in traits"
         :key="idx"
+        v-safe-html="trait"
         class="trait"
-        v-html="trait"
       ></div>
       <div
         v-if="monster.mythicActions.actions.length > 0"
+        v-safe-html="mythicTrait"
         class="trait"
-        v-html="mythicTrait"
       ></div>
     </div>
     <h3 class="section">{{ $t('editor.action.label') }}</h3>
     <div
       v-if="monster.multiattacks.length > 0"
+      v-safe-html="multiattacks"
       class="multiattack"
-      v-html="multiattacks"
     ></div>
     <div
       v-for="(attack, idx) in attacks"
       :key="idx"
+      v-safe-html="attack"
       class="attack"
-      v-html="attack"
     ></div>
     <div
       v-for="(action, idx) in actions"
       :key="idx"
+      v-safe-html="action"
       class="action"
-      v-html="action"
     ></div>
     <div
       v-if="monster.spellcasting.atWill.length > 0"
       class="innate-spellcasting"
     >
-      <div v-html="sanitizedInnateSpellcastingPreamble"></div>
+      <div v-safe-html="sanitizedInnateSpellcastingPreamble"></div>
       <div class="spell-list">
         <div
           v-for="innate in innateSpellcastingLists"
@@ -219,7 +219,7 @@
       </div>
     </div>
     <div v-if="monster.spellcasting.standard.length > 0" class="spellcasting">
-      <div v-html="sanitizedClassSpellcastingPreamble"></div>
+      <div v-safe-html="sanitizedClassSpellcastingPreamble"></div>
       <div class="spell-list">
         <div v-if="monster.knownSpellsOfLevel(0).length > 0" class="spell-row">
           <span class="spell-label"
@@ -256,8 +256,8 @@
       <div
         v-for="(action, idx) in bonusActions"
         :key="idx"
+        v-safe-html="action"
         class="action"
-        v-html="action"
       ></div>
     </div>
     <div
@@ -268,28 +268,28 @@
       <div
         v-for="(reaction, idx) in reactions"
         :key="idx"
+        v-safe-html="reaction"
         class="action reaction"
-        v-html="reaction"
       ></div>
     </div>
     <div v-if="monster.legendaryActions.count > 0" class="legendary-actions">
       <h3 class="section">{{ $t('editor.legendary.label') }}</h3>
-      <div class="preamble" v-html="legendaryPreamble"></div>
+      <div v-safe-html="legendaryPreamble" class="preamble"></div>
       <div
         v-for="(action, idx) in legendaryActions"
         :key="idx"
+        v-safe-html="action"
         class="action legendary"
-        v-html="action"
       ></div>
     </div>
     <div v-if="monster.mythicActions.actions.length > 0" class="mythic-actions">
       <h3 class="section">{{ $t('editor.mythic.label') }}</h3>
-      <div class="preamble" v-html="mythicPreamble"></div>
+      <div v-safe-html="mythicPreamble" class="preamble"></div>
       <div
         v-for="(action, idx) in mythicActions"
         :key="idx"
+        v-safe-html="action"
         class="action legendary"
-        v-html="action"
       ></div>
     </div>
     <div
@@ -300,50 +300,65 @@
       <div
         v-for="(reaction, idx) in reactions"
         :key="idx"
+        v-safe-html="reaction"
         class="action reaction"
-        v-html="reaction"
       ></div>
     </div>
     <div v-if="monster.lairActions.length > 0" class="lair-actions">
       <h3 class="section">{{ $t('editor.lair.label') }}</h3>
-      <div class="preamble" v-html="lairActionPreamble"></div>
+      <div v-safe-html="lairActionPreamble" class="preamble"></div>
       <ul>
         <li
           v-for="(lairAction, idx) in lairActions"
           :key="idx"
+          v-safe-html="lairAction"
           class="action lair"
-          v-html="lairAction"
         ></li>
       </ul>
     </div>
     <div v-if="monster.regionalEffects.length > 0" class="regional-effects">
       <h3 class="section">{{ $t('editor.regional.label') }}</h3>
-      <div class="preamble" v-html="regionalEffectPreamble"></div>
+      <div v-safe-html="regionalEffectPreamble" class="preamble"></div>
       <ul>
         <li
           v-for="(effect, idx) in regionalEffects"
           :key="idx"
+          v-safe-html="effect"
           class="action regional"
-          v-html="effect"
         ></li>
       </ul>
     </div>
     <div v-if="blockStyle.mm2014 && monster.inventory !== ''" class="inventory">
       <h3 class="section">{{ $t('editor.inventory.label') }}</h3>
-      <div v-html="inventory"></div>
+      <div v-safe-html="inventory"></div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, StyleValue } from 'vue'
+import { computed, defineComponent, Directive, inject, StyleValue } from 'vue'
 import { useMonsterStore } from 'src/stores/monster-store'
 import { useTextRenderer } from './useTextRenderer'
 import { useProcessTokens } from './useProcessTokens'
 import { useEditorStore } from 'src/stores/editor-store'
 
+const safeHtmlDirective: Directive<HTMLElement, string> = {
+  beforeMount(el, binding) {
+    // Assumes input was sanitized by the renderer pipeline.
+    el.innerHTML = binding.value ?? ''
+  },
+  updated(el, binding) {
+    if (binding.value !== binding.oldValue) {
+      el.innerHTML = binding.value ?? ''
+    }
+  },
+}
+
 export default defineComponent({
   name: 'WebRenderer',
+  directives: {
+    safeHtml: safeHtmlDirective,
+  },
   setup() {
     const monster = useMonsterStore()
     const { sanitizeWebString } = useProcessTokens()

@@ -12,7 +12,7 @@ import N2W from 'number-to-words'
 import { useProcessTokens } from './useProcessTokens'
 import _, { capitalize } from 'lodash'
 import { useEditorStore } from 'src/stores/editor-store'
-import { DndStat, Monster } from '../models'
+import { DndStat } from '../models'
 
 // rendering strings for whatever needs it
 export function useTextRenderer() {

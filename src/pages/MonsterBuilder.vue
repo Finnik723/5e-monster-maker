@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { useMonsterStore } from 'src/stores/monster-store'
-import { computed, defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
 import BasicsEditor from 'src/components/editor/BasicsEditor.vue'
 import WebRenderer from 'src/components/rendering/WebRenderer.vue'
 import SavesEditor from 'src/components/editor/SavesEditor.vue'

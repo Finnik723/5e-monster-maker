@@ -54,7 +54,8 @@
 
       <q-separator />
 
-      <q-card-section style="max-height: 50vh" class="scroll" v-html="oglText">
+      <q-card-section style="max-height: 50vh" class="scroll">
+        <div class="ogl-text">{{ oglText }}</div>
       </q-card-section>
 
       <q-separator />
@@ -110,7 +111,7 @@ export default defineComponent({
       openLink: (url: string) => window.open(url),
       oglDialog: ref(false),
       changelog,
-      oglText: ogl.replace(/\n/g, '<br />'),
+      oglText: ogl,
       ...appVersion,
     }
   },
@@ -127,5 +128,9 @@ export default defineComponent({
 .ogl-link:hover,
 .version:hover {
   color: #81d4fa;
+}
+
+.ogl-text {
+  white-space: pre-wrap;
 }
 </style>
