@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -29,6 +29,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Set build number
+        run: |
+          echo '{"build":'"$GITHUB_RUN_NUMBER"'}' > build.json
 
       - name: Build
         env:
