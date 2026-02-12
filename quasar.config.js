@@ -66,7 +66,9 @@ module.exports = configure(function (ctx) {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      publicPath: '/5emm',
+      // GitHub Pages is typically served from '/<repo>/' (project pages).
+      // Keep the original default, but allow overriding via env (e.g. in CI).
+      publicPath: process.env.PUBLIC_PATH || '/5emm24/',
       // analyze: true,
       env: {
         PACKAGE_VERSION: version,
