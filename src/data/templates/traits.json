@@ -123,7 +123,7 @@
         "maxSave": 0,
         "maxModifier": 0,
         "multitarget": false,
-        "ehpMultiplier": 0,
+        "ehpMultiplier": 1,
         "ehpModifier": 0,
         "acModifier": 0,
         "automatic": false,
