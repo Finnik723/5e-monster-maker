@@ -133,6 +133,28 @@
       "customPreamble": false
     },
     {
+      "templateName": "Dark Devotion",
+      "name": "Dark Devotion",
+      "description": "The {NAME} has advantage on saving throws against being charmed or frightened.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "automatic": false,
+        "include": true
+      },
+      "icon": "mdi-account-arrow-up",
+      "customPreamble": false
+    },
+    {
       "templateName": "Regeneration",
       "name": "Regeneration",
       "description": "The {NAME} regains 10 hit points at the start of its turn. If the {NAME} takes acid or fire damage, this trait doesn't function at the start of the {NAME}'s next turn. The {NAME} dies only if it starts its turn with 0 hit points and doesn't regenerate.",
