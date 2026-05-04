@@ -6,6 +6,7 @@
     :definitions="toolbarDefinitions"
     class="full-width q-ma-sm"
     @update:model-value="(value) => throttledUpdate(value)"
+    @paste.capture.stop.prevent="onPaste"
   >
     <template #title>
       <div
@@ -168,6 +169,11 @@ export default defineComponent({
       ctx.emit('update:modelValue', value)
     }, 500)
 
+    const onPaste = (evt: ClipboardEvent) => {
+      const text = evt.clipboardData?.getData('text/plain') ?? ''
+      document.execCommand('insertText', false, text)
+    }
+
     const add = (token: string) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const edit = editorRef.value as any
@@ -221,6 +227,7 @@ export default defineComponent({
       contextTokenRef,
       editorRef,
       add,
+      onPaste,
       ...tokens,
       contextTokens,
       contextTokenLabel,
