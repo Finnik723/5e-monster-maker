@@ -129,29 +129,29 @@ export const useCr = () => {
     return allActions[0]
   }
 
-  const resMultiplier = (cr: number) => {
-    if (monster.resistances == null || monster.resistances.length === 0)
-      return 1
-
-    if (cr <= 4) return 2
-    if (cr <= 10) return 1.5
-    if (cr <= 16) return 1.25
-
+  const resMultiplier = (_cr: number) => {
+    // --- old logic (disabled) ---
+    // if (monster.resistances == null || monster.resistances.length === 0)
+    //   return 1
+    // if (_cr <= 4) return 2
+    // if (_cr <= 10) return 1.5
+    // if (_cr <= 16) return 1.25
     return 1
   }
 
-  const immuneMultiplier = (cr: number) => {
-    if (monster.immunities == null || monster.immunities.length === 0) return 1
-
-    if (cr <= 10) return 2
-    if (cr <= 16) return 1.5
-
-    return 1.25
+  const immuneMultiplier = (_cr: number) => {
+    return 1
+    // --- old logic (disabled) ---
+    // if (monster.immunities == null || monster.immunities.length === 0) return 1
+    // if (_cr <= 10) return 2
+    // if (_cr <= 16) return 1.5
+    // return 1.25
   }
 
   const vulnMultiplier = () => {
-    if (monster.vulnerabilities != null && monster.vulnerabilities.length > 0)
-      return 0.5
+    // --- old logic (disabled) ---
+    //if (monster.vulnerabilities != null && monster.vulnerabilities.length > 0)
+    //  return 0.5
 
     return 1
   }
@@ -443,41 +443,31 @@ export const useCr = () => {
     const vulnMult = vulnMultiplier()
 
     // multipliers
-    if (resMult > 1) {
-      mods.push({
-        title: t('monster.resistances'),
-        subtitle: t('editor.cr.atCr', [
-          t(
-            'editor.cr.resistance',
-            {
-              n: monster.resistances?.length,
-            },
-            monster.resistances?.length ?? 0
-          ),
-          estCr.cr,
-        ]),
-        value: `x${resMult}`,
-        type: 'HP',
-      })
-    }
 
-    if (immuneMult > 1) {
-      mods.push({
-        title: t('monster.immunities'),
-        subtitle: t('editor.cr.atCr', [
-          t(
-            'editor.cr.immunity',
-            {
-              n: monster.immunities?.length,
-            },
-            monster.immunities?.length ?? 0
-          ),
-          estCr.cr,
-        ]),
-        value: `x${immuneMult}`,
-        type: 'HP',
-      })
-    }
+    // --- old logic (disabled): resistance and immunity CR annotation cards ---
+    // if (resMult > 1) {
+    //   mods.push({
+    //     title: t('monster.resistances'),
+    //     subtitle: t('editor.cr.atCr', [
+    //       t('editor.cr.resistance', { n: monster.resistances?.length }, monster.resistances?.length ?? 0),
+    //       estCr.cr,
+    //     ]),
+    //     value: `x${resMult}`,
+    //     type: 'HP',
+    //   })
+    // }
+    // if (immuneMult > 1) {
+    //   mods.push({
+    //     title: t('monster.immunities'),
+    //     subtitle: t('editor.cr.atCr', [
+    //       t('editor.cr.immunity', { n: monster.immunities?.length }, monster.immunities?.length ?? 0),
+    //       estCr.cr,
+    //     ]),
+    //     value: `x${immuneMult}`,
+    //     type: 'HP',
+    //   })
+    // }
+    // --- end old logic ---
 
     if (vulnMult < 1) {
       mods.push({
