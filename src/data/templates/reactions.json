@@ -1,0 +1,26 @@
+{
+  "reactions": [
+    {
+      "name": "Parry",
+      "description": "{monster.name} adds&nbsp;{monster.proficiency} to its AC against that attack, possibly causing it to miss.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "trigger": "Takes hit by melee attack roll",
+      "icon": "mdi-account-reactivate",
+      "templateName": "Parry"
+    },
+    {
+      "name": "Defensive magic",
+      "description": "{NAME} casts <i>Backlash</i>,&nbsp;<i>Counterspell </i>or <i>Shiled </i>spell if its conditions are met, using spellcasting ability.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "trigger": "",
+      "icon": "mdi-account-reactivate",
+      "templateName": "Defensive magic"
+    }
+  ]
+}

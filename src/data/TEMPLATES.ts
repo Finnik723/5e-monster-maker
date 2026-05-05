@@ -1,9 +1,11 @@
 import actions from './templates/actions.json'
 import attacks from './templates/attacks.json'
+import reactions from './templates/reactions.json'
 import traits from './templates/traits.json'
 import {
   AttackTemplate,
   ActionTemplate,
+  ReactionTemplate,
   TraitTemplate,
   DndAttack,
   DndStat,
@@ -58,6 +60,15 @@ attacks.attacks.forEach((a) => {
   }
 })
 
+const srd_reactions: Record<string, ReactionTemplate> = {}
+reactions.reactions.forEach((r) => {
+  srd_reactions[r.templateName] = {
+    ...r,
+    type: 'Reaction',
+    icon: r.icon === '' ? DEFAULT_TEMPLATE_ICON.Reaction : r.icon,
+  }
+})
+
 const srd_traits: Record<string, TraitTemplate> = {}
 traits.traits.map((t) => {
   srd_traits[t.templateName] = {
@@ -72,6 +83,7 @@ export function useTemplates() {
   return {
     srd_actions,
     srd_attacks,
+    srd_reactions,
     srd_traits,
   }
 }

@@ -70,6 +70,7 @@ export const useTemplatesStore = defineStore('templates', {
       return {
         ...templates.srd_actions,
         ...templates.srd_attacks,
+        ...templates.srd_reactions,
         ...templates.srd_traits,
       }
     },

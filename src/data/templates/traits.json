@@ -113,10 +113,10 @@
     {
       "templateName": "Action Surge",
       "name": "Action Surge",
-      "description": "On its turn, {NAME} can take additional action on top of its regular action and a possible bonus action. Once it uses this feature, it must finish a short or long rest before it can use it again.",
+      "description": "On its turn, {NAME} can take additional action on top of its regular action and a possible bonus action.",
       "limitedUse": {
         "count": 1,
-        "rate": "LONG_OR_SHORT"
+        "rate": "SHORT_REST"
       },
       "crAnnotation": {
         "maxDamage": 0,
@@ -510,6 +510,94 @@
       "type": "Trait",
       "icon": "mdi-fire",
       "customPreamble": false
+    },
+    {
+      "name": "Fey Ancestry",
+      "description": "{NAME} has Advantage against saves with Charm effect, and magic can't put her to sleep.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "customPreamble": false,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-auto-fix",
+      "templateName": "Fey Ancestry"
+    },
+    {
+      "name": "Life Suppression Aura",
+      "description": "The {NAME} emits an aura of necrotic suppression in 60-foot radius. While in aura, a creature other than {NAME} cannot regain Hit Points. If an effect would cause a creature in aura to regain hit points, it regain none, and the {NAME} gains Temorary Hit Points equal to half of the ammount.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "customPreamble": false,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-heart-off",
+      "templateName": "Life Suppression Aura"
+    },
+    {
+      "name": "Extraordinary durability",
+      "description": "{NAME} is immune to any spell or effect that would alter its form, move it against its will, or move it to another plane of existance against its will.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "customPreamble": false,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-shield-lock",
+      "templateName": "Extraordinary durability"
+    },
+    {
+      "name": "Extraordinary force",
+      "description": "{NAME} can use its action to move through any object or magical barrier as if it were difficult terrain, destroying it in process. In addition, {NAME} deals double damage to objects and structures and it counts as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "customPreamble": false,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-shield-check",
+      "templateName": "Extraordinary force"
     }
   ]
 }

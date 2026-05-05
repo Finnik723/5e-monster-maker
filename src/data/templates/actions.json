@@ -252,6 +252,102 @@
       "customPreamble": false,
       "bonusAction": false,
       "icon": "mdi-weather-tornado"
+    },
+    {
+      "name": "Innate Sorcery",
+      "description": "{monster.name} is unleashing its draconic blood magic to get Advantage on the attack rolls of spells and increased DC for spells by 1 (incleded in Spellcasting), for 1 minute.",
+      "recharge": "",
+      "limitedUse": {
+        "count": 2,
+        "rate": "DAY"
+      },
+      "save": {
+        "override": false,
+        "overrideValue": 0
+      },
+      "range": "",
+      "stat": "none",
+      "effects": [],
+      "legendaryOnly": false,
+      "customPreamble": false,
+      "bonusAction": true,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-movie-open",
+      "templateName": "Innate Sorcery"
+    },
+    {
+      "name": "Aim",
+      "description": "{monster.name} gains an Advantage on its next attach roll until the end of this turn.",
+      "recharge": "",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "save": {
+        "override": false,
+        "overrideValue": 0
+      },
+      "range": "",
+      "stat": "none",
+      "effects": [],
+      "legendaryOnly": false,
+      "customPreamble": false,
+      "bonusAction": true,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-movie-open",
+      "templateName": "Aim"
+    },
+    {
+      "name": "Misty step",
+      "description": "{NAME} casts&nbsp;<i>Misty Step</i> spell.",
+      "recharge": "",
+      "limitedUse": {
+        "count": 0,
+        "rate": "DAY"
+      },
+      "save": {
+        "override": false,
+        "overrideValue": 0
+      },
+      "range": "",
+      "stat": "none",
+      "effects": [],
+      "legendaryOnly": false,
+      "customPreamble": false,
+      "bonusAction": true,
+      "crAnnotation": {
+        "maxDamage": 0,
+        "maxSave": 0,
+        "maxModifier": 0,
+        "multitarget": false,
+        "ehpMultiplier": 1,
+        "ehpModifier": 0,
+        "acModifier": 0,
+        "include": true,
+        "automatic": true
+      },
+      "icon": "mdi-movie-open",
+      "templateName": "Misty step"
     }
   ]
 }
