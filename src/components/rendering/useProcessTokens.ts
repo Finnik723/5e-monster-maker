@@ -570,6 +570,35 @@ export function useProcessTokens() {
     }
   }
 
+  const actionBodyTemplate = (
+    context: MonsterAction,
+    monster: ReturnType<typeof useMonsterStore>
+  ) => {
+    if (context.customPreamble || context.stat === 'none') {
+      return context.description
+    }
+
+    return `<i>${t(`statFull.${context.stat}`)} Saving Throw:</i> DC ${saveForAction(
+      monster,
+      context.stat,
+      context.save
+    )}, {action.range}. {action.effects} ${context.description}`
+  }
+
+  const processActionBody = (
+    contextRef: MaybeRef<MonsterAction>,
+    monster: ReturnType<typeof useMonsterStore>
+  ) => {
+    const context = unref(contextRef)
+
+    return processTokens(
+      actionBodyTemplate(context, monster),
+      context,
+      monster,
+      'action'
+    )
+  }
+
   const processAction = (
     contextRef: MaybeRef<MonsterAction>,
     monster: ReturnType<typeof useMonsterStore>
@@ -577,28 +606,18 @@ export function useProcessTokens() {
     const context = unref(contextRef)
 
     if (context.customPreamble) {
-      return processTokens(context.description, context, monster, 'action')
-    } else if (context.stat !== 'none') {
-      return processTokens(
-        `<b><i>{action.name}{action.limitedUse}.</i></b> <i>${t(
-          `statFull.${context.stat}`
-        )} Saving Throw:</i> DC ${saveForAction(
-          monster,
-          context.stat,
-          context.save
-        )}, {action.range}. {action.effects} ${context.description}`,
-        context,
-        monster,
-        'action'
-      )
-    } else {
-      return processTokens(
-        `<b><i>{action.name}{action.limitedUse}.</i></b> ${context.description}`,
-        context,
-        monster,
-        'action'
-      )
+      return processActionBody(context, monster)
     }
+
+    return processTokens(
+      `<b><i>{action.name}{action.limitedUse}.</i></b> ${actionBodyTemplate(
+        context,
+        monster
+      )}`,
+      context,
+      monster,
+      'action'
+    )
   }
 
   const processReaction = (
@@ -754,12 +773,7 @@ export function useProcessTokens() {
         // process
         if (action.action.legendaryOnly) {
           // need it without the name attached
-          description = processTokens(
-            action.action.description,
-            action.action as MonsterAction,
-            monster,
-            'action'
-          )
+          description = processActionBody(action.action, monster)
         } else {
           description = processTokens(
             t('presets.legendaryAction', [action.action.name]),
@@ -950,6 +964,7 @@ export function useProcessTokens() {
     processTokens,
     processTrait,
     processAction,
+    processActionBody,
     processReaction,
     processAttack,
     processMultiattack,

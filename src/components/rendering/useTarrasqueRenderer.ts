@@ -1,7 +1,7 @@
 import { CR } from 'src/data/CR'
 import { useMonsterStore } from 'src/stores/monster-store'
 import { useI18n } from 'vue-i18n'
-import { DndAttack, DndStat, MonsterAction } from '../models'
+import { DndAttack, DndStat } from '../models'
 import { avgRoll, renderBonus } from './mathRendering'
 import { useProcessTokens } from './useProcessTokens'
 import { useTextRenderer } from './useTextRenderer'
@@ -23,7 +23,7 @@ const attackNoName =
 export function useTarrasqueRenderer() {
   const monster = useMonsterStore()
   const renderer = useTextRenderer()
-  const { processTokens, stripTags } = useProcessTokens()
+  const { processActionBody, processTokens, stripTags } = useProcessTokens()
   const { t } = useI18n()
 
   // does not account for versatile
@@ -198,12 +198,7 @@ export function useTarrasqueRenderer() {
             // process
             if (action.action.legendaryOnly) {
               // need it without the name attached
-              description = processTokens(
-                action.action.description,
-                action.action as MonsterAction,
-                monster,
-                'action'
-              )
+              description = processActionBody(action.action, monster)
             } else {
               description = processTokens(
                 t('presets.legendaryAction', [action.action.name]),
