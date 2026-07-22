@@ -1,7 +1,7 @@
 import { CR } from 'src/data/CR'
 import { useMonsterStore } from 'src/stores/monster-store'
 import { useI18n } from 'vue-i18n'
-import { DndStat, MonsterAction } from '../models'
+import { DndStat } from '../models'
 import { avgRoll, renderBonus, statModifier } from './mathRendering'
 import { useProcessTokens } from './useProcessTokens'
 import { useTextRenderer } from './useTextRenderer'
@@ -22,7 +22,7 @@ const attackNoName =
 export function useImprovedInitRenderer() {
   const monster = useMonsterStore()
   const renderer = useTextRenderer()
-  const { processTokens, stripTags } = useProcessTokens()
+  const { processActionBody, processTokens, stripTags } = useProcessTokens()
   const { t } = useI18n()
 
   // https://www.improved-initiative.com/
@@ -238,12 +238,7 @@ export function useImprovedInitRenderer() {
             // process
             if (action.action.legendaryOnly) {
               // need it without the name attached
-              description = processTokens(
-                action.action.description,
-                action.action as MonsterAction,
-                monster,
-                'action'
-              )
+              description = processActionBody(action.action, monster)
             } else {
               description = processTokens(
                 t('presets.legendaryAction', [action.action.name]),
@@ -286,12 +281,7 @@ export function useImprovedInitRenderer() {
             // process
             if (action.action.legendaryOnly) {
               // need it without the name attached
-              description = processTokens(
-                action.action.description,
-                action.action as MonsterAction,
-                monster,
-                'action'
-              )
+              description = processActionBody(action.action, monster)
             } else {
               description = processTokens(
                 t('presets.legendaryAction', [action.action.name]),
