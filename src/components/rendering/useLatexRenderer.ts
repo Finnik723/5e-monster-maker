@@ -3,7 +3,6 @@ import { CR } from 'src/data/CR'
 import { useMonsterStore } from 'src/stores/monster-store'
 import { useSpellsStore } from 'src/stores/spells-store'
 import { useI18n } from 'vue-i18n'
-import { MonsterAction } from '../models'
 import { renderBonus, statModifier } from './mathRendering'
 import { listJoin, useProcessTokens } from './useProcessTokens'
 import { useTextRenderer } from './useTextRenderer'
@@ -16,7 +15,8 @@ export function useLatexRenderer() {
   const monster = useMonsterStore()
   const spellStore = useSpellsStore()
   const renderer = useTextRenderer()
-  const { latexFormatter, processTokens } = useProcessTokens()
+  const { latexFormatter, processActionBody, processTokens } =
+    useProcessTokens()
   const { t } = useI18n()
 
   const getTraits = () => {
@@ -168,12 +168,7 @@ export function useLatexRenderer() {
           // process
           if (action.action.legendaryOnly) {
             // need it without the name attached
-            description = processTokens(
-              action.action.description,
-              action.action as MonsterAction,
-              monster,
-              'action'
-            )
+            description = processActionBody(action.action, monster)
           } else {
             description = processTokens(
               t('presets.legendaryAction', [action.action.name]),
@@ -225,12 +220,7 @@ export function useLatexRenderer() {
           // process
           if (action.action.legendaryOnly) {
             // need it without the name attached
-            description = processTokens(
-              action.action.description,
-              action.action as MonsterAction,
-              monster,
-              'action'
-            )
+            description = processActionBody(action.action, monster)
           } else {
             description = processTokens(
               t('presets.legendaryAction', [action.action.name]),
