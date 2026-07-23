@@ -301,7 +301,7 @@ export default {
         failByFive: 'Failure by 5 or More',
       },
       effectTemplate: {
-        halfDamage: 'Half Damage.',
+        halfDamage: 'Half damage only.',
       },
       saveDescription: 'Ability Save Effects',
       saveHelp:
