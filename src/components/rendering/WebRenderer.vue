@@ -311,14 +311,12 @@
     <div v-if="monster.lairActions.length > 0" class="lair-actions">
       <h3 class="section">{{ $t('editor.lair.label') }}</h3>
       <div v-safe-html="lairActionPreamble" class="preamble"></div>
-      <ul>
-        <li
-          v-for="(lairAction, idx) in lairActions"
-          :key="idx"
-          v-safe-html="lairAction"
-          class="action lair"
-        ></li>
-      </ul>
+      <div
+        v-for="(lairAction, idx) in lairActions"
+        :key="idx"
+        v-safe-html="lairAction"
+        class="action lair"
+      ></div>
     </div>
     <div v-if="monster.regionalEffects.length > 0" class="regional-effects">
       <h3 class="section">{{ $t('editor.regional.label') }}</h3>
@@ -622,7 +620,6 @@ export default defineComponent({
     }
   }
 
-  .lair-actions,
   .regional-effects {
     li {
       margin-bottom: 0;

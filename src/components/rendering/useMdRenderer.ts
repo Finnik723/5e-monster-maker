@@ -141,10 +141,12 @@ ${formattedActions.join('\n>\n')}\n>`
 > ${mdFormatter(renderer.lairActionPreamble.value)}`
 
     const formattedLair = renderer.lairActions.value.map((r) => {
-      return `> - ${mdFormatter(r)}`
+      return `> ${mdFormatter(r)}`
     })
 
-    return `\n${preamble}\n${formattedLair.join('\n')}\n`
+    return `\n${preamble}
+>
+${formattedLair.join('\n>\n')}\n>`
   }
 
   const getRegionalEffects = () => {
