@@ -278,6 +278,7 @@ export function useFileLoader() {
     // adjust saves in the attack field. null is ok but let's make it 0
     for (const attack of monster.attacks) {
       if (attack.save === null) attack.save = 0
+      attack.range.distance ??= attack.range.standard
     }
 
     // trait and action limited use, check for empty string

@@ -142,6 +142,7 @@ export interface DndAttack {
     standard: number
     long: number
     reach: number
+    distance?: number
   }
   targets: number
   damage: {
@@ -480,6 +481,7 @@ export function defaultAttack(): DndAttack {
       standard: 20,
       long: 60,
       reach: 5,
+      distance: 20,
     },
     targets: 1,
     damage: {

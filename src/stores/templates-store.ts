@@ -125,6 +125,7 @@ export const useTemplatesStore = defineStore('templates', {
         // reassert type based on type
         if (type === 'Attack') {
           const attackInstance = templateInstance as DndAttack
+          attackInstance.range.distance ??= attackInstance.range.standard
           monsterStore.attacks.push(attackInstance)
         } else if (type === 'Action') {
           const actionInstance = templateInstance as MonsterAction
