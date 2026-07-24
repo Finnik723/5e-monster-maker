@@ -37,6 +37,10 @@ attacks.attacks.forEach((a) => {
     // get imported in the future
     distance: a.distance as DndAttack['distance'],
     kind: a.kind as DndAttack['kind'],
+    range: {
+      ...a.range,
+      distance: a.range.standard,
+    },
     modifier: {
       ...a.modifier,
       stat: a.modifier.stat as DndStat,

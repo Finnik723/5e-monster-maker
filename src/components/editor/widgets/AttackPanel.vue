@@ -113,7 +113,10 @@
           "
         />
         <q-input
-          v-show="attack.distance === 'RANGED' || attack.distance === 'BOTH'"
+          v-show="
+            attack.kind === 'WEAPON' &&
+            (attack.distance === 'RANGED' || attack.distance === 'BOTH')
+          "
           :model-value="attack.range.standard"
           :label="$t('monster.attack.close')"
           type="number"
@@ -126,7 +129,10 @@
           "
         />
         <q-input
-          v-show="attack.distance === 'RANGED' || attack.distance === 'BOTH'"
+          v-show="
+            attack.kind === 'WEAPON' &&
+            (attack.distance === 'RANGED' || attack.distance === 'BOTH')
+          "
           :model-value="attack.range.long"
           :label="$t('monster.attack.long')"
           type="number"
@@ -136,6 +142,22 @@
           class="col-1 q-pa-sm"
           @update:model-value="
             (value: string | number | null) => (attack.range.long = validateNumber(value, 0))
+          "
+        />
+        <q-input
+          v-show="
+            attack.kind === 'SPELL' &&
+            (attack.distance === 'RANGED' || attack.distance === 'BOTH')
+          "
+          :model-value="attack.range.distance ?? attack.range.standard"
+          :label="$t('monster.attack.distance')"
+          type="number"
+          min="0"
+          step="5"
+          suffix="ft"
+          class="col-2 q-pa-sm"
+          @update:model-value="
+            (value: string | number | null) => (attack.range.distance = validateNumber(value, 0))
           "
         />
         <q-input

@@ -280,7 +280,8 @@
             "properties": {
               "standard": { "type": "integer" },
               "long": { "type": "integer" },
-              "reach": { "type": "integer" }
+              "reach": { "type": "integer" },
+              "distance": { "type": "integer" }
             }
           },
           "targets": { "type": "integer" },

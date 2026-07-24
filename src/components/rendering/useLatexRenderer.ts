@@ -84,6 +84,10 @@ export function useLatexRenderer() {
     for (const attack of monster.attacks) {
       const showRange = attack.distance !== 'MELEE'
       const showReach = attack.distance !== 'RANGED'
+      const range =
+        attack.kind === 'SPELL'
+          ? `${attack.range.distance ?? attack.range.standard}`
+          : `${attack.range.standard}/${attack.range.long}`
       const distance =
         attack.distance === 'BOTH' ? 'both' : attack.distance.toLowerCase()
       const type = attack.kind.toLowerCase()
@@ -103,9 +107,7 @@ export function useLatexRenderer() {
       type=${type},
       mod=${renderBonus(monster.attackModifier(attack.id))},
       ${!showReach ? '%' : ''}reach=${attack.range.reach},
-      ${!showRange ? '%' : ''}range=${attack.range.standard}/${
-        attack.range.long
-      },
+      ${!showRange ? '%' : ''}range=${range},
       targets=${N2W.toWords(attack.targets)} target${
         attack.targets === 1 ? '' : 's'
       },

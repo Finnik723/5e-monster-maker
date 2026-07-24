@@ -240,20 +240,27 @@ export function useProcessTokens() {
       context.range.standard,
       context.range.long,
     ])
+    const spellRange = t('editor.attack.spellRange', [
+      context.range.distance ?? context.range.standard,
+    ])
     const bothRange = t('editor.attack.bothRange', [
       context.range.reach,
       context.range.standard,
       context.range.long,
     ])
+    const bothSpellRange = t('editor.attack.bothSpellRange', [
+      context.range.reach,
+      context.range.distance ?? context.range.standard,
+    ])
 
-    input = input.replace(
-      /\{attack.range\}/gi,
-      context.distance === 'MELEE'
-        ? meleeRange
-        : context.distance === 'RANGED'
-        ? rangeRange
-        : bothRange
-    )
+    let attackRange = meleeRange
+    if (context.distance === 'RANGED') {
+      attackRange = context.kind === 'SPELL' ? spellRange : rangeRange
+    } else if (context.distance === 'BOTH') {
+      attackRange = context.kind === 'SPELL' ? bothSpellRange : bothRange
+    }
+
+    input = input.replace(/\{attack.range\}/gi, attackRange)
 
     // targets
     if (context.targets > 1 || editorStore.style !== '2024') {

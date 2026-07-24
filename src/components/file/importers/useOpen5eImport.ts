@@ -485,6 +485,8 @@ export function useOpen5eImport() {
         newAttack.range.long = parseInt(infoMatches[6])
       }
 
+      newAttack.range.distance = newAttack.range.standard
+
       // target count
       const targets = wordToNumber[infoMatches[7]]
       if (targets != null) {
