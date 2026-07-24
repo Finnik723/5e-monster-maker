@@ -269,13 +269,11 @@ export function useLatexRenderer() {
 ${latexFormatter(renderer.lairActionPreamble.value)}`
 
     const formattedLairActions = renderer.lairActions.value.map((a) => {
-      return `\\item ${latexFormatter(a)}`
+      return latexFormatter(a)
     })
 
     return `${preamble}
-    \\begin{itemize}
-      ${formattedLairActions.join('\n')}
-    \\end{itemize}`
+${formattedLairActions.join('\n\n')}`
   }
 
   const getRegionalEffects = () => {
